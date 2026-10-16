@@ -6,16 +6,15 @@ type RevealProps = {
   children: React.ReactNode;
   className?: string;
   delay?: number;
-  distance?: number;
 };
 
-export function Reveal({ children, className = "", delay = 0, distance = 28 }: RevealProps) {
+export function Reveal({ children, className = "", delay = 0 }: RevealProps) {
   const reducedMotion = useReducedMotion();
   return (
     <motion.div
       className={className}
-      initial={{ opacity: 0, y: reducedMotion ? 0 : distance }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, clipPath: reducedMotion ? "inset(0)" : "inset(0 0 100% 0)" }}
+      whileInView={{ opacity: 1, clipPath: "inset(0)" }}
       viewport={{ once: true, amount: 0.18, margin: "0px 0px -8%" }}
       transition={{ duration: reducedMotion ? 0 : 0.85, delay: reducedMotion ? 0 : delay, ease: [0.22, 1, 0.36, 1] }}
     >

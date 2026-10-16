@@ -3,16 +3,17 @@
 import { useEffect, useState } from "react";
 
 const links = [
-  ["Invitation", "#invitation"],
-  ["Details", "#details"],
-  ["Wishes", "#guestbook"],
+  ["Words", "#invitation"],
+  ["Date", "#details"],
+  ["Place", "#venue"],
+  ["Notes", "#guestbook"],
 ] as const;
 
 export default function Navigation() {
   const [active, setActive] = useState("#top");
 
   useEffect(() => {
-    const sections = links.map(([, href]) => document.querySelector(href)).filter(Boolean) as Element[];
+    const sections = [document.querySelector("#top"), ...links.map(([, href]) => document.querySelector(href))].filter(Boolean) as Element[];
     const observer = new IntersectionObserver(
       (entries) => entries.forEach((entry) => entry.isIntersecting && setActive(`#${entry.target.id}`)),
       { rootMargin: "-35% 0px -55%", threshold: 0 },
@@ -23,7 +24,8 @@ export default function Navigation() {
 
   return (
     <header className="site-header">
-      <a className="site-brand" href="#top" aria-label="Mostafa and Roaa invitation home">M <i>&amp;</i> R</a>
+      <a className="site-brand" href="#top" aria-label="Maged and Mona invitation home"><span>M</span><i>&amp;</i><span>M</span></a>
+      <span className="site-header-note">Maged + Mona · 12.11.26</span>
       <nav aria-label="Invitation sections">
         {links.map(([label, href]) => (
           <a key={href} href={href} aria-current={active === href ? "location" : undefined}>{label}</a>

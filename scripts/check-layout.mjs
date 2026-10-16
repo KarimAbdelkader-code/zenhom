@@ -43,7 +43,9 @@ try {
   for (const width of widths) {
     await send("Emulation.setDeviceMetricsOverride", { width, height: width < 700 ? 900 : 1000, deviceScaleFactor: 1, mobile: width < 700 });
     await send("Page.navigate", { url: "http://127.0.0.1:3100" });
-    await sleep(1800);
+    await sleep(2600);
+    await send("Runtime.evaluate", { expression: "document.querySelector('.opening-button')?.click();" });
+    await sleep(850);
     const response = await send("Runtime.evaluate", {
       expression: `(() => ({
         clientWidth: document.documentElement.clientWidth,
@@ -51,6 +53,7 @@ try {
         heroOpacity: getComputedStyle(document.querySelector('.hero h1')).opacity,
         hasTime: document.body.innerText.includes('8:00 PM'),
         arabicDirection: getComputedStyle(document.querySelector('.arabic')).direction,
+        gardenEntered: document.querySelector('.opening-gate')?.classList.contains('is-open') === true && !document.body.classList.contains('opening-locked'),
         deadLinks: [...document.querySelectorAll('a[href]')].filter((link) => {
           const href = link.getAttribute('href');
           return !href || href === '#' || (href.startsWith('#') && !document.querySelector(href));
@@ -63,8 +66,9 @@ try {
     assert.equal(result.heroOpacity, "1", `${width}px hero did not finish its entrance`);
     assert.equal(result.hasTime, true, `${width}px is missing the event time`);
     assert.equal(result.arabicDirection, "rtl", `${width}px Quran text is not RTL`);
+    assert.equal(result.gardenEntered, true, `${width}px opening garden did not enter`);
     assert.equal(result.deadLinks, 0, `${width}px has a dead or placeholder link`);
-    console.log(`${width}px: layout, hero, time and RTL verified`);
+    console.log(`${width}px: layout, garden entry, hero, time and RTL verified`);
   }
   socket.close();
 } finally {
