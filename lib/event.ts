@@ -1,5 +1,5 @@
 export const EVENT = {
-  name: "Maged & Mona Engagement",
+  name: "Maged & Mona Wedding",
   venue: "Life eye Resort Oceal Hall",
   date: "12 November 2026",
   time: "8:00 PM",
@@ -14,7 +14,7 @@ calendar.search = new URLSearchParams({
   text: EVENT.name,
   dates: "20261112T200000/20261112T210000",
   ctz: EVENT.timeZone,
-  details: "Celebrate the engagement of Maged and Mona with us.",
+  details: "Celebrate the wedding of Maged and Mona with us.",
   location: EVENT.venue,
 }).toString();
 

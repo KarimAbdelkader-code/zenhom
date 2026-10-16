@@ -32,10 +32,10 @@ const script = Parisienne({
 
 export const metadata: Metadata = {
   title: "Maged & Mona — A Celebration of Love",
-  description: "Celebrate Maged and Mona's engagement on 12 November 2026 at Life eye Resort Oceal Hall.",
+  description: "Celebrate Maged and Mona's wedding on 12 November 2026 at Life eye Resort Oceal Hall.",
   openGraph: {
     title: "Maged & Mona — A Celebration of Love",
-    description: "12 November 2026 · 8:00 PM · Life eye Resort Oceal Hall",
+    description: "Maged and Mona's wedding · 12 November 2026 · 8:00 PM · Life eye Resort Oceal Hall",
     type: "website",
   },
 };

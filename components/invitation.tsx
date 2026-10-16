@@ -78,7 +78,7 @@ export default function Invitation() {
             <div className="date-intro"><Eyebrow>Put it in your diary</Eyebrow><h2>Thursday,<br /><i>please.</i></h2><p>Keep this evening open. We are gathering our favorite people under one roof.</p><a className="button outline" href={CALENDAR_URL} target="_blank" rel="noreferrer"><CalendarDays size={17} aria-hidden="true" /> Add to calendar</a></div>
             <div className="date-stage">
               <div className="date-display"><span className="date-day">12</span><span className="date-month">November</span><span className="date-year">2026</span></div>
-              <div className="date-meta"><span>{EVENT.time}</span><span>Engagement celebration</span><span>Africa / Cairo</span></div>
+              <div className="date-meta"><span>{EVENT.time}</span><span>Wedding celebration</span><span>Africa / Cairo</span></div>
               <Countdown />
             </div>
           </Reveal>

@@ -25,7 +25,7 @@ export default function Countdown() {
   }, []);
 
   return (
-    <div className="countdown" aria-label={`${time[0]} days, ${time[1]} hours, ${time[2]} minutes and ${time[3]} seconds until the engagement`} role="timer">
+    <div className="countdown" aria-label={`${time[0]} days, ${time[1]} hours, ${time[2]} minutes and ${time[3]} seconds until the wedding`} role="timer">
       {time.map((value, index) => (
         <div key={index}>
           <span>{String(value).padStart(2, "0")}</span>

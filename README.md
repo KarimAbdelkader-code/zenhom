@@ -1,4 +1,4 @@
-# Maged & Mona — Digital Engagement Invitation
+# Maged & Mona — Digital Wedding Invitation
 
 ## Run locally
 
