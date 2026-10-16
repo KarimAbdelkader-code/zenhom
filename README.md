@@ -22,3 +22,4 @@ npm run db:apply
 The private `/admin` route lists every RSVP and wish. Set `ADMIN_USERNAME` and `ADMIN_PASSWORD` in `.env.local`; these values stay server-only and are enforced before the route renders.
 
 # de4a
+# zenhom
