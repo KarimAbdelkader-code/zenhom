@@ -30,7 +30,7 @@ export default function Guestbook() {
       <WishForm onSent={load} />
       <div className="guestbook-status" aria-live="polite">
         {state === "loading" && "Loading wishes…"}
-        {state === "ready" && wishes.length === 0 && "Be the first to share a wish for Mostafa & Roaa."}
+        {state === "ready" && wishes.length === 0 && "Be the first to share a wish for Maged & Mona."}
         {state === "error" && "We couldn’t load the guestbook. Please try again shortly."}
       </div>
       {state === "ready" && wishes.length > 0 && (

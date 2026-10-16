@@ -45,7 +45,7 @@ export default async function AdminPage() {
   return (
     <main className="admin-page">
       <header className="admin-heading">
-        <div><p className="eyebrow">Private guest list</p><h1>Mostafa <i>&amp;</i> Roaa</h1></div>
+        <div><p className="eyebrow">Private guest list</p><h1>Maged <i>&amp;</i> Mona</h1></div>
         <Link href="/"><ArrowLeft size={16} /> Invitation</Link>
       </header>
 

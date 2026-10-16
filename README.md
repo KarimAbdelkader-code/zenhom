@@ -1,4 +1,4 @@
-# Mostafa & Roaa — Digital Engagement Invitation
+# Maged & Mona — Digital Engagement Invitation
 
 ## Run locally
 

@@ -49,7 +49,7 @@ export function RsvpForm() {
         )} />
       </fieldset>
       <FieldError id="rsvp-attending-error" message={errors.attending?.message} />
-      <label>Message for Mostafa &amp; Roaa<textarea rows={3} {...register("message")} /></label>
+      <label>Message for Maged &amp; Mona<textarea rows={3} {...register("message")} /></label>
       <button className="button dark" disabled={pending} aria-busy={pending}>{pending ? "Sending…" : "Send RSVP"}<ArrowRight size={16} aria-hidden="true" /></button>
       <p className={`form-status ${status ? status.ok ? "success" : "error" : ""}`} aria-live="polite">{status?.message}</p>
     </form>
