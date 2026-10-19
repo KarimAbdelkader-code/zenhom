@@ -1,4 +1,4 @@
-import { ArrowDownRight, ArrowUpRight, CalendarDays, MapPin } from "lucide-react";
+import { ArrowDownLeft, ArrowDownRight, ArrowUpLeft, ArrowUpRight, CalendarDays, MapPin } from "lucide-react";
 import Countdown from "./countdown";
 import { Botanical } from "./botanical";
 import Guestbook from "./guestbook";
@@ -9,7 +9,7 @@ import MusicPlayer from "./music-player";
 import OpeningGate from "./opening-gate";
 
 const Eyebrow = ({ children }: { children: React.ReactNode }) => <p className="eyebrow">{children}</p>;
-const Monogram = () => <div className="monogram" aria-label="Maged and Mona">M <i>&amp;</i> M</div>;
+const Monogram = ({ language = "en" }: { language?: "en" | "ar" }) => <div className="monogram" aria-label={language === "ar" ? "ماجد ومنى" : "Maged and Mona"}>M <i>&amp;</i> M</div>;
 
 function FlowerMark({ className = "" }: { className?: string }) {
   return (
@@ -33,12 +33,21 @@ function FlowerMark({ className = "" }: { className?: string }) {
   );
 }
 
-export default function Invitation() {
+export default function Invitation({ language = "en" }: { language?: "en" | "ar" }) {
+  const isArabic = language === "ar";
+  const date = isArabic ? "١٢ نوفمبر ٢٠٢٦" : EVENT.date;
+  const time = isArabic ? "٨:٠٠ مساءً" : EVENT.time;
+  const ExploreArrow = isArabic ? ArrowDownLeft : ArrowDownRight;
+  const VenueArrow = isArabic ? ArrowUpLeft : ArrowUpRight;
+  const eveningItems: [string, string, string][] = isArabic
+    ? [["٠١", "الترحيب", `${time} · نرحّب بكم في احتفالنا.`], ["٠٢", "الوعد", "وعدٌ قُطع بحب."], ["٠٣", "العشاء والموسيقى", "أمسية مليئة بالأشياء الجميلة."], ["٠٤", "معًا", "أجمل ما فيها أن تكونوا معنا."]]
+    : [["01", "Welcome", `${time} · We welcome you to the celebration.`], ["02", "The promise", "A promise made with love."], ["03", "Dinner & music", "An evening filled with good things."], ["04", "Together", "The best part is having you there."]];
+
   return (
-    <>
-      <OpeningGate />
-      <Navigation />
-      <MusicPlayer />
+    <div className={isArabic ? "arabic-invitation" : undefined} dir={isArabic ? "rtl" : undefined} lang={isArabic ? "ar" : undefined}>
+      <OpeningGate language={language} />
+      <Navigation language={language} />
+      <MusicPlayer language={language} />
       <main>
         <section id="top" className="hero section">
           <div className="hero-orbit hero-orbit-one" aria-hidden="true" />
@@ -46,81 +55,81 @@ export default function Invitation() {
           <Botanical side="left" className="hero-botanical hero-botanical-left" />
           <div className="hero-copy">
             <Stagger>
-              <StaggerItem><Eyebrow>Our little garden · 2026</Eyebrow></StaggerItem>
+              <StaggerItem><Eyebrow>{isArabic ? "حديقتنا الصغيرة · ٢٠٢٦" : "Our little garden · 2026"}</Eyebrow></StaggerItem>
               <StaggerItem><h1><span>Maged</span><small>&amp;</small><span>Mona</span></h1></StaggerItem>
-              <StaggerItem><p className="hero-deck">A new chapter is in bloom. Join us for an evening made of family, flowers, music, and a promise.</p></StaggerItem>
-              <StaggerItem><a className="button violet" href="#invitation">Explore the garden <ArrowDownRight size={17} aria-hidden="true" /></a></StaggerItem>
+              <StaggerItem><p className="hero-deck">{isArabic ? "يبدأ فصل جديد في الإزهار. انضموا إلينا في أمسية من العائلة والزهور والموسيقى والوعد." : "A new chapter is in bloom. Join us for an evening made of family, flowers, music, and a promise."}</p></StaggerItem>
+              <StaggerItem><a className="button violet" href="#invitation">{isArabic ? "اكتشفوا الحديقة" : "Explore the garden"} <ExploreArrow size={17} aria-hidden="true" /></a></StaggerItem>
             </Stagger>
-            <div className="hero-date-lockup" aria-label="Thursday 12 November 2026">
-              <span>THU</span><strong>12</strong><span>NOV<br />2026</span>
+            <div className="hero-date-lockup" aria-label={isArabic ? "الخميس ١٢ نوفمبر ٢٠٢٦" : "Thursday 12 November 2026"}>
+              <span>{isArabic ? "الخميس" : "THU"}</span><strong>{isArabic ? "١٢" : "12"}</strong><span>{isArabic ? "نوفمبر" : "NOV"}<br />{isArabic ? "٢٠٢٦" : "2026"}</span>
             </div>
           </div>
           <div className="hero-art" aria-hidden="true">
-            <div className="hero-art-card"><span>LE / 01</span><small>where our story<br />keeps growing</small></div>
+            <div className="hero-art-card"><span>LE / 01</span><small>{isArabic ? <>حيث تستمر حكايتنا<br />في النمو</> : <>where our story<br />keeps growing</>}</small></div>
             <FlowerMark />
-            <span className="hero-art-caption">a French garden romance</span>
+            <span className="hero-art-caption">{isArabic ? "حكاية حب في حديقة فرنسية" : "a French garden romance"}</span>
           </div>
           <div className="hero-side-note">M&amp;M <span /> Life eye Resort</div>
         </section>
 
         <section id="invitation" className="section quran-section">
-          <div className="section-label">01 <span>THE FIRST WORD</span></div>
+          <div className="section-label">{isArabic ? "٠١" : "01"} <span>{isArabic ? "الكلمة الأولى" : "THE FIRST WORD"}</span></div>
           <Reveal className="quran-layout">
-            <div className="quran-intro"><Eyebrow>In the name of God, the most gracious</Eyebrow><h2>A verse<br /><i>for a beginning.</i></h2></div>
+            <div className="quran-intro"><Eyebrow>{isArabic ? "بسم الله الرحمن الرحيم" : "In the name of God, the most gracious"}</Eyebrow><h2>{isArabic ? <>آية<br /><i>لبداية.</i></> : <>A verse<br /><i>for a beginning.</i></>}</h2></div>
             <div className="quran-copy"><p lang="ar" dir="rtl" className="arabic">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِي ذَٰلِكَ لَآيَاتٍ لِّقَوْمٍ يَتَفَكَّرُونَ</p><p className="citation">سورة الروم — الآية ٢١</p></div>
           </Reveal>
           <Botanical side="right" className="quran-botanical" />
         </section>
 
         <section id="details" className="section date-section">
-          <div className="section-label">02 <span>SAVE THE DATE</span></div>
+          <div className="section-label">{isArabic ? "٠٢" : "02"} <span>{isArabic ? "احفظوا الموعد" : "SAVE THE DATE"}</span></div>
           <Reveal className="date-layout">
-            <div className="date-intro"><Eyebrow>Put it in your diary</Eyebrow><h2>Thursday,<br /><i>please.</i></h2><p>Keep this evening open. We are gathering our favorite people under one roof.</p><a className="button outline" href={CALENDAR_URL} target="_blank" rel="noreferrer"><CalendarDays size={17} aria-hidden="true" /> Add to calendar</a></div>
+            <div className="date-intro"><Eyebrow>{isArabic ? "سجّلوا الموعد" : "Put it in your diary"}</Eyebrow><h2>{isArabic ? <>الخميس،<br /><i>من فضلكم.</i></> : <>Thursday,<br /><i>please.</i></>}</h2><p>{isArabic ? "اتركوا هذه الأمسية مفتوحة. سنجمع أحبّ الناس إلينا تحت سقف واحد." : "Keep this evening open. We are gathering our favorite people under one roof."}</p><a className="button outline" href={CALENDAR_URL} target="_blank" rel="noreferrer"><CalendarDays size={17} aria-hidden="true" /> {isArabic ? "أضيفوا الموعد إلى التقويم" : "Add to calendar"}</a></div>
             <div className="date-stage">
-              <div className="date-display"><span className="date-day">12</span><span className="date-month">November</span><span className="date-year">2026</span></div>
-              <div className="date-meta"><span>{EVENT.time}</span><span>Wedding celebration</span><span>Egypt / Cairo</span></div>
-              <Countdown />
+              <div className="date-display"><span className="date-day">{isArabic ? "١٢" : "12"}</span><span className="date-month">{isArabic ? "نوفمبر" : "November"}</span><span className="date-year">{isArabic ? "٢٠٢٦" : "2026"}</span></div>
+              <div className="date-meta"><span>{time}</span><span>{isArabic ? "احتفال الزفاف" : "Wedding celebration"}</span><span>{isArabic ? "مصر / القاهرة" : "Egypt / Cairo"}</span></div>
+              <Countdown language={language} />
             </div>
           </Reveal>
         </section>
 
         <section id="venue" className="section venue-section">
-          <Reveal className="venue-art"><div className="venue-photo"><span>LE / 02</span><small>the place</small></div><Botanical side="left" /></Reveal>
-          <Reveal className="venue-copy" delay={0.12}><Eyebrow>03 / THE PLACE</Eyebrow><h2>Meet us<br /><i>in the garden.</i></h2><p>Join us at <strong>{EVENT.venue}</strong> for an evening of dinner, music, and the people who mean the most.</p><div className="venue-details"><MapPin size={18} aria-hidden="true" /><div><b>{EVENT.venue}</b><span>{EVENT.date} · {EVENT.time}</span></div></div><a className="button violet" href={EVENT.mapsUrl} target="_blank" rel="noreferrer">Find your way <ArrowUpRight size={16} aria-hidden="true" /></a></Reveal>
+          <Reveal className="venue-art"><div className="venue-photo"><span>LE / 02</span><small>{isArabic ? "المكان" : "the place"}</small></div><Botanical side="left" /></Reveal>
+          <Reveal className="venue-copy" delay={0.12}><Eyebrow>{isArabic ? "٠٣ / المكان" : "03 / THE PLACE"}</Eyebrow><h2>{isArabic ? <>نلتقي بكم<br /><i>في الحديقة.</i></> : <>Meet us<br /><i>in the garden.</i></>}</h2><p>{isArabic ? <>نلتقيكم في <strong>{EVENT.venue}</strong> لأمسية من العشاء والموسيقى والأشخاص الذين يعنون لنا الكثير.</> : <>Join us at <strong>{EVENT.venue}</strong> for an evening of dinner, music, and the people who mean the most.</>}</p><div className="venue-details"><MapPin size={18} aria-hidden="true" /><div><b>{EVENT.venue}</b><span>{date} · {time}</span></div></div><a className="button violet" href={EVENT.mapsUrl} target="_blank" rel="noreferrer">{isArabic ? "اعثروا على الطريق" : "Find your way"} <VenueArrow size={16} aria-hidden="true" /></a></Reveal>
         </section>
 
         <section id="story" className="section story-section">
-          <div className="section-label">04 <span>OUR CHAPTER</span></div>
+          <div className="section-label">{isArabic ? "٠٤" : "04"} <span>{isArabic ? "فصلنا" : "OUR CHAPTER"}</span></div>
           <Botanical side="right" className="story-botanical" />
           <Reveal className="story-layout">
-            <div className="story-quote"><span className="quote-mark">“</span><p>Love grows best when it is shared.</p><span className="quote-line" /></div>
-            <div className="story-copy"><Eyebrow>A note from us</Eyebrow><h2>One promise.<br />Two families.<br /><i>A lifetime ahead.</i></h2><p>On November 12th, we celebrate the start of our next chapter. Your presence will make this moment even more special.</p><p className="script-note">with all our love</p></div>
+            <div className="story-quote"><span className="quote-mark">“</span><p>{isArabic ? "ينمو الحب أجمل حين نتشاركه." : "Love grows best when it is shared."}</p><span className="quote-line" /></div>
+            <div className="story-copy"><Eyebrow>{isArabic ? "كلمة منّا" : "A note from us"}</Eyebrow><h2>{isArabic ? <>وعد واحد.<br />عائلتان.<br /><i>عمر كامل أمامنا.</i></> : <>One promise.<br />Two families.<br /><i>A lifetime ahead.</i></>}</h2><p>{isArabic ? "في ١٢ نوفمبر، نحتفل ببداية فصلنا القادم. حضوركم سيجعل هذه اللحظة أكثر خصوصية." : "On November 12th, we celebrate the start of our next chapter. Your presence will make this moment even more special."}</p><p className="script-note">{isArabic ? "بكل حبنا" : "with all our love"}</p></div>
           </Reveal>
         </section>
 
         <section id="evening" className="section evening-section">
-          <div className="section-label">05 <span>THE EVENING</span></div>
+          <div className="section-label">{isArabic ? "٠٥" : "05"} <span>{isArabic ? "الأمسية" : "THE EVENING"}</span></div>
           <Reveal className="evening-layout">
-            <div className="evening-intro"><Eyebrow>Come as you are</Eyebrow><h2>Stay for<br /><i>the joy.</i></h2><p>Four little moments, one beautiful evening.</p></div>
-            <div className="evening-list">{[["01", "Welcome", `${EVENT.time} · We welcome you to the celebration.`], ["02", "The promise", "A promise made with love."], ["03", "Dinner & music", "An evening filled with good things."], ["04", "Together", "The best part is having you there."]].map(([number, title, copy]) => <div className="evening-item" key={number}><span>{number}</span><div><h3>{title}</h3><p>{copy}</p></div></div>)}</div>
+            <div className="evening-intro"><Eyebrow>{isArabic ? "تعالوا كما أنتم" : "Come as you are"}</Eyebrow><h2>{isArabic ? <>ابقوا من أجل<br /><i>الفرح.</i></> : <>Stay for<br /><i>the joy.</i></>}</h2><p>{isArabic ? "أربع لحظات صغيرة، أمسية واحدة جميلة." : "Four little moments, one beautiful evening."}</p></div>
+            <div className="evening-list">{eveningItems.map(([number, title, copy]) => <div className="evening-item" key={number}><span>{number}</span><div><h3>{title}</h3><p>{copy}</p></div></div>)}</div>
           </Reveal>
         </section>
 
         <section className="section garden-note">
-          <div className="garden-note-art"><FlowerMark className="note-flower" /><span>the little things<br />matter most</span></div>
-          <Reveal className="garden-note-copy"><Eyebrow>A little note</Eyebrow><h2>Bring your<br /><i>whole heart.</i></h2><p>We cannot wait to see the people who make our world feel like home.</p><Monogram /></Reveal>
+          <div className="garden-note-art"><FlowerMark className="note-flower" /><span>{isArabic ? <>التفاصيل الصغيرة<br />هي الأهم</> : <>the little things<br />matter most</>}</span></div>
+          <Reveal className="garden-note-copy"><Eyebrow>{isArabic ? "ملاحظة صغيرة" : "A little note"}</Eyebrow><h2>{isArabic ? <>أحضروا<br /><i>قلوبكم كاملة.</i></> : <>Bring your<br /><i>whole heart.</i></>}</h2><p>{isArabic ? "لا نستطيع الانتظار لرؤية من يجعلون عالمنا يشبه البيت." : "We cannot wait to see the people who make our world feel like home."}</p><Monogram language={language} /></Reveal>
         </section>
 
         <section id="guestbook" className="section guestbook">
-          <div className="section-label">07 <span>NOTES FROM OUR LOVED ONES</span></div>
-          <Reveal><Eyebrow>Leave a little love</Eyebrow><h2>Notes from<br /><i>our people.</i></h2><Guestbook /></Reveal>
+          <div className="section-label">{isArabic ? "٠٧" : "07"} <span>{isArabic ? "رسائل من أحبّائنا" : "NOTES FROM OUR LOVED ONES"}</span></div>
+          <Reveal><Eyebrow>{isArabic ? "اتركوا لنا قليلًا من الحب" : "Leave a little love"}</Eyebrow><h2>{isArabic ? <>رسائل<br /><i>أحبّتنا.</i></> : <>Notes from<br /><i>our people.</i></>}</h2><Guestbook language={language} /></Reveal>
         </section>
 
         <footer id="closing" className="section closing-section">
           <Botanical side="left" className="closing-botanical" /><FlowerMark className="closing-flower" />
-          <Reveal className="closing-copy"><Eyebrow>Until we meet beneath the flowers</Eyebrow><h2>Maged <i>&amp;</i> Mona</h2><p className="closing-date">12 · 11 · 2026</p><p><time dateTime={EVENT.startsAt}>{EVENT.time}</time> · {EVENT.venue}</p><div className="closing-rule" /><p>Having you with us is the greatest gift.</p><Monogram /></Reveal>
+          <Reveal className="closing-copy"><Eyebrow>{isArabic ? "إلى أن نلتقي تحت الزهور" : "Until we meet beneath the flowers"}</Eyebrow><h2>Maged <i>&amp;</i> Mona</h2><p className="closing-date">{isArabic ? "١٢ · ١١ · ٢٠٢٦" : "12 · 11 · 2026"}</p><p><time dateTime={EVENT.startsAt}>{time}</time> · {EVENT.venue}</p><div className="closing-rule" /><p>{isArabic ? "وجودكم معنا هو أعظم هدية." : "Having you with us is the greatest gift."}</p><Monogram language={language} /></Reveal>
         </footer>
       </main>
-    </>
+    </div>
   );
 }

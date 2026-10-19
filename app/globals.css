@@ -348,3 +348,28 @@ h2 i { font-style: italic; }
 @media (prefers-reduced-motion: reduce) {
   *, *:before, *:after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+.arabic-invitation { direction: rtl; }
+.arabic-invitation h2, .arabic-invitation h3 { font-family: var(--font-arabic), serif; letter-spacing: 0; line-height: 1.15; }
+.arabic-invitation .eyebrow,
+.arabic-invitation .hero-deck,
+.arabic-invitation .section-label,
+.arabic-invitation .date-meta,
+.arabic-invitation .venue-copy > p,
+.arabic-invitation .evening-item p,
+.arabic-invitation .form-card,
+.arabic-invitation .guestbook-status,
+.arabic-invitation .button,
+.arabic-invitation .opening-button,
+.arabic-invitation .music-toggle { font-family: var(--font-arabic), var(--font-sans), sans-serif; letter-spacing: 0; text-transform: none; }
+.arabic-invitation .section-label { right: clamp(22px, 8vw, 130px); left: auto; }
+.arabic-invitation .hero h1 { margin-right: -.06em; margin-left: 0; }
+.arabic-invitation .hero h1 small { margin-right: 13%; margin-left: 0; }
+.arabic-invitation .hero-side-note { right: auto; left: clamp(22px, 3vw, 56px); }
+.arabic-invitation .quran-copy { border-radius: 0 48px 0 48px; box-shadow: -18px 18px 0 rgba(168, 187, 163, .28); }
+.arabic-invitation .date-stage { border-radius: 64px 0 64px 0; box-shadow: -22px 22px 0 rgba(232, 197, 213, .5); }
+.arabic-invitation .venue-photo { border-radius: 0 54% 0 54%; box-shadow: -24px 24px 0 var(--sage); }
+.arabic-invitation .story-quote { border-radius: 0 50% 0 50%; }
+.arabic-invitation .garden-note-art { border-radius: 0 50% 0 50%; }
+.arabic-invitation .form-card, .arabic-invitation .guestbook .form-card { text-align: right; }
+.arabic-invitation .music-toggle { right: auto; left: clamp(16px, 4vw, 48px); }

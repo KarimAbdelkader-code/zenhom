@@ -3,9 +3,10 @@
 import { Volume2, VolumeX } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
-export default function MusicPlayer() {
+export default function MusicPlayer({ language = "en" }: { language?: "en" | "ar" }) {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const isArabic = language === "ar";
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -40,9 +41,9 @@ export default function MusicPlayer() {
   return (
     <>
       <audio ref={audioRef} src="/invitation-music.mp3" loop preload="auto" />
-      <button className="music-toggle" type="button" onClick={toggleMusic} aria-label={isPlaying ? "Pause music" : "Play music"}>
+      <button className="music-toggle" type="button" onClick={toggleMusic} aria-label={isPlaying ? (isArabic ? "إيقاف الموسيقى" : "Pause music") : (isArabic ? "تشغيل الموسيقى" : "Play music")}>
         {isPlaying ? <Volume2 size={17} /> : <VolumeX size={17} />}
-        <span>{isPlaying ? "Music on" : "Play music"}</span>
+        <span>{isPlaying ? (isArabic ? "الموسيقى تعمل" : "Music on") : (isArabic ? "تشغيل الموسيقى" : "Play music")}</span>
       </button>
     </>
   );

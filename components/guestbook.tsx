@@ -5,10 +5,11 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Wish } from "@/lib/database-types";
 import { WishForm } from "./forms";
 
-export default function Guestbook() {
+export default function Guestbook({ language = "en" }: { language?: "en" | "ar" }) {
   const [wishes, setWishes] = useState<Wish[]>([]);
   const [state, setState] = useState<"loading" | "ready" | "error">("loading");
   const reducedMotion = useReducedMotion();
+  const isArabic = language === "ar";
   const load = useCallback(async () => {
     try {
       const response = await fetch("/api/wishes", { cache: "no-store" });
@@ -27,14 +28,14 @@ export default function Guestbook() {
 
   return (
     <>
-      <WishForm onSent={load} />
+      <WishForm onSent={load} language={language} />
       <div className="guestbook-status" aria-live="polite">
-        {state === "loading" && "Loading wishes…"}
-        {state === "ready" && wishes.length === 0 && "Be the first to share a wish for Maged & Mona."}
-        {state === "error" && "We couldn’t load the guestbook. Please try again shortly."}
+        {state === "loading" && (isArabic ? "جارٍ تحميل الأمنيات…" : "Loading wishes…")}
+        {state === "ready" && wishes.length === 0 && (isArabic ? "كونوا أول من يشارك أمنية لماجد ومنى." : "Be the first to share a wish for Maged & Mona.")}
+        {state === "error" && (isArabic ? "تعذّر تحميل سجلّ التهاني. يرجى المحاولة لاحقًا." : "We couldn’t load the guestbook. Please try again shortly.")}
       </div>
       {state === "ready" && wishes.length > 0 && (
-        <div className="wishes" aria-label="Guest wishes">
+        <div className="wishes" aria-label={isArabic ? "أمنيات الضيوف" : "Guest wishes"}>
           {wishes.map((wish, index) => <motion.blockquote key={wish.id} initial={{ opacity: 0, y: reducedMotion ? 0 : 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: reducedMotion ? 0 : 0.55, delay: reducedMotion ? 0 : Math.min(index * 0.06, 0.3) }}><p>“{wish.message}”</p><cite>— {wish.name}</cite></motion.blockquote>)}
         </div>
       )}

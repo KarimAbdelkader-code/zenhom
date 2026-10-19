@@ -1,10 +1,11 @@
 "use client";
 
-import { ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
 
-export default function OpeningGate() {
+export default function OpeningGate({ language = "en" }: { language?: "en" | "ar" }) {
   const [open, setOpen] = useState(false);
+  const isArabic = language === "ar";
 
   useEffect(() => {
     document.body.classList.add("opening-locked");
@@ -35,13 +36,13 @@ export default function OpeningGate() {
         <circle cx="220" cy="18" r="27" />
       </svg>
       <div className="opening-gate-inner">
-        <p className="opening-kicker">A French garden romance</p>
-        <div className="opening-initials" aria-label="Maged and Mona">M <i>&amp;</i> M</div>
+        <p className="opening-kicker">{isArabic ? "حكاية حب في حديقة فرنسية" : "A French garden romance"}</p>
+        <div className="opening-initials" aria-label={isArabic ? "ماجد ومنى" : "Maged and Mona"}>M <i>&amp;</i> M</div>
         <span className="opening-drawn-line" aria-hidden="true" />
         <h1>Maged <em>&amp;</em> Mona</h1>
-        <p className="opening-date">12 <span>·</span> 11 <span>·</span> 2026</p>
+        <p className="opening-date">{isArabic ? "١٢ · ١١ · ٢٠٢٦" : "12 · 11 · 2026"}</p>
         <button type="button" className="opening-button" onClick={enter} aria-controls="top">
-          Enter our garden <ArrowRight size={16} aria-hidden="true" />
+          {isArabic ? "ادخلوا حديقتنا" : "Enter our garden"} {isArabic ? <ArrowLeft size={16} aria-hidden="true" /> : <ArrowRight size={16} aria-hidden="true" />}
         </button>
       </div>
     </div>

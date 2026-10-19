@@ -15,8 +15,10 @@ export function getRemaining(now = Date.now()) {
   ];
 }
 
-export default function Countdown() {
+export default function Countdown({ language = "en" }: { language?: "en" | "ar" }) {
   const [time, setTime] = useState<number[]>([0, 0, 0, 0]);
+  const isArabic = language === "ar";
+  const labels = isArabic ? ["يوم", "ساعة", "دقيقة", "ثانية"] : ["Days", "Hours", "Minutes", "Seconds"];
 
   useEffect(() => {
     const firstTick = window.setTimeout(() => setTime(getRemaining()), 0);
@@ -25,11 +27,11 @@ export default function Countdown() {
   }, []);
 
   return (
-    <div className="countdown" aria-label={`${time[0]} days, ${time[1]} hours, ${time[2]} minutes and ${time[3]} seconds until the wedding`} role="timer">
+    <div className="countdown" aria-label={isArabic ? `${time[0]} يوم، ${time[1]} ساعة، ${time[2]} دقيقة و${time[3]} ثانية حتى الزفاف` : `${time[0]} days, ${time[1]} hours, ${time[2]} minutes and ${time[3]} seconds until the wedding`} role="timer">
       {time.map((value, index) => (
         <div key={index}>
           <span>{String(value).padStart(2, "0")}</span>
-          <small>{["Days", "Hours", "Minutes", "Seconds"][index]}</small>
+          <small>{labels[index]}</small>
         </div>
       ))}
     </div>
